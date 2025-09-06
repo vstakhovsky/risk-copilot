@@ -1,0 +1,2 @@
+# ADR {number}: {title}
+{context}

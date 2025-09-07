@@ -61,18 +61,19 @@ This leads to delays, misalignment, and knowledge loss.
 
 ## 🏗️ Architecture
 
-```mermaid
 flowchart TB
   UI[Web UI] --> API[FastAPI Orchestrator]
   API --> AGENTS[Claude Sub-Agents via MCP]
   API --> DB[(Database)]
   API --> ART[(Artifacts Repo)]
   API --> VEC[(Vector DB)]
-  UI <-.diffs.-> ART
+  UI -. "diffs" .-> ART
+
+
 
 ---
 
-🔁 Process Pipeline
+## 🔁 Process Pipeline
 flowchart LR
   A[Intake] --> B[Risk Analysis]
   B --> C[Scope Options]
@@ -83,7 +84,7 @@ flowchart LR
 
 ---
 
-📐 UML Sequence
+## 📐 UML Sequence
 
 sequenceDiagram
   participant U as User
@@ -102,7 +103,7 @@ sequenceDiagram
 
 ---
 
-🔐 AI Security
+## 🔐 AI Security
 
 Threats
 - Prompt injection / jailbreak
@@ -123,13 +124,13 @@ Controls
 - Continuous CI/CD security evals
 
 ---
-📈 Roadmap
+## 📈 Roadmap
 - v0.2: UI + MCP
 - v0.3: BPMN/PR Flow integration
 - v1.0: RBAC + full audit
 
 ------
-🚀 Quick Start
+## 🚀 Quick Start
 
 # Generate artifacts
 python3 src/riskcopilot.py --input data/context.json --out out/

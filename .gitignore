@@ -1,2 +1,9 @@
 out/
 __pycache__/
+ui/.next/
+ui/node_modules/
+ui/.turbo/
+out/
+uploads/
+dist/
+__pycache__/

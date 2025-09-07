@@ -1,0 +1,1 @@
+# Risk & Scope Copilot — Starter\n\nSee cli, api, ui folders.\n

@@ -1,0 +1,17 @@
+
+name: release
+on:
+  push:
+    tags: ["v*.*.*"]
+jobs:
+  build-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pyinstaller
+      - run: pyinstaller -F cli/main.py -n riskcopilot
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/riskcopilot*

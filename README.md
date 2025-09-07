@@ -10,6 +10,15 @@
 
 ---
 
+## 🖼️ Screenshots
+
+
+<img width="697" height="168" alt="Screenshot 2025-09-08 at 00 11 56" src="https://github.com/user-attachments/assets/067f0186-dace-4b89-bfdd-6a45750fe7de" />
+
+<img width="618" height="608" alt="Screenshot 2025-09-08 at 00 12 20" src="https://github.com/user-attachments/assets/b32fb337-1e71-4b0d-bf47-7765b1bca0ef" />
+
+---
+
 ## 🌍 Problem
 Technical Product Managers spend days aligning risks, dependencies, legal and operational constraints across Jira, Confluence, GitHub, and endless meetings.  
 This leads to delays, misalignment, and knowledge loss.

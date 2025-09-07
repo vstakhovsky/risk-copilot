@@ -85,6 +85,54 @@ This describes the analysis flow. The core multi-agent orchestration and artifac
 
 ### 🔄 4-Step Analysis Pipeline
 
+```mermaid
+flowchart LR
+  A["🗂️ Upload Context"] --> B["🤖 Configure Agents"]
+  B --> C["⚡ Execute Analysis"]
+  C --> D["📁 Export Results"]
+
+  subgraph "Step 1: Upload Context"
+    direction TB
+    A1["Select Project Folder"]
+    A2["Choose Analysis Profile"]
+    A3["Configure File Exclusions"]
+    A4["Preview Project Structure"]
+  end
+
+  subgraph "Step 2: Configure Agents"
+    direction TB
+    B1["🎯 Risk Analysis Agent"]
+    B2["⚖️ Scope Planning Agent"]
+    B3["👥 RACI Matrix Agent"]
+    B4["📄 ADR Generation Agent"]
+    B5["📊 Diagram Agent"]
+  end
+
+  subgraph "Step 3: Execute Analysis"
+    direction TB
+    C1["Multi-Agent Coordination"]
+    C2["Evidence Collection"]
+    C3["Confidence Scoring"]
+    C4["Result Synthesis"]
+  end
+
+  subgraph "Step 4: Export Results"
+    direction TB
+    D1["GitHub Integration"]
+    D2["Jira/Confluence Export"]
+    D3["Executive Reports"]
+    D4["Artifact Downloads"]
+  end
+
+  %% Optional: show linear flow through sub-steps
+  A --> A1
+  A1 --> A2 --> A3 --> A4
+  B --> B1 --> B2 --> B3 --> B4 --> B5
+  C --> C1 --> C2 --> C3 --> C4
+  D --> D1 --> D2 --> D3 --> D4
+
+```
+
 
 ## 📊 Data Flow
 - **Input:** Context JSON, documents, *aromas* (prompt profiles).  

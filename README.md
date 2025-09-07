@@ -28,6 +28,7 @@ Perfect for complex projects:
 - [Problem](#-problem)
 - [Scenario](#-scenario)
 - [Value](#-value)
+- [Value](#-value)
 
 
 
@@ -51,8 +52,6 @@ Risk Copilot trades manual risk assessment for an "intelligent multi-agent blast
 
 ## 🎯 Scenario
 
-## 🎯 Problem & Solution
-
 | Scenario | Pain Point | Risk Copilot Benefit |
 |---|---|---|
 | **Cross-team alignment** | “We need to align 12 teams on project risks.” | Generates unified risk view<br>with stakeholder mapping across all teams<br>and evidence scores. |
@@ -61,13 +60,23 @@ Risk Copilot trades manual risk assessment for an "intelligent multi-agent blast
 | **Scope creep management** | Stakeholders want “everything” without trade-off analysis. | Delivers multiple scope options with clear cost/benefit analysis and timeline impact. |
 | **Executive reporting** | Status updates require manual data gathering from multiple sources. | Unified dashboard shows real-time project health with exportable executive summaries. |
 
-
 ---
 
 ## 💎 Value
 - Ready-to-use **PR artifacts** with traceable evidence and GitHub-style diffs.  
 - Unified **status dashboard** for releases, dependencies, and scope changes.  
 - Seamless integration into existing workflows.
+
+---
+
+## ✨ Features
+
+- ⚡ **Fast multi-agent analysis** *(Python + FastAPI backend)* — comprehensive project assessment in minutes
+- ✅ **Interactive agent configuration** — select exactly what you need: risks, scope, RACI, ADRs, diagrams
+- 📊 **Evidence & confidence scoring** — every recommendation backed by traceable reasoning
+- 🔍 **GitHub-style diffs** — see exactly what changed and why with a full audit trail
+- 🪶 **Lightweight integration** — desktop app, web UI, CLI, and REST API
+- 💻 **Cross-platform** — Windows, macOS, Linux, and web browsers
 
 ---
 

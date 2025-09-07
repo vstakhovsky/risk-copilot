@@ -156,6 +156,44 @@ flowchart TB
 
 ```
 
+### 🧭 Agent Interaction Sequence
+
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant UI as Interface
+  participant O as Orchestrator
+  participant RA as Risk Agent
+  participant SA as Scope Agent
+  participant RACI as RACI Agent
+  participant ADR as ADR Agent
+  participant DIAG as Diagram Agent
+
+  U->>UI: Upload project docs + select profile
+  UI-->>O: Initialize multi-agent pipeline
+
+  par Parallel Analysis
+    O->>RA: Analyze risks (technical, business, compliance)
+    RA-->>O: Risk assessment + evidence scores
+  and
+    O->>SA: Generate scope alternatives
+    SA-->>O: Scope options + trade-offs
+  and
+    O->>RACI: Create responsibility matrix
+    RACI-->>O: RACI matrix + accountability gaps
+  end
+
+  O->>ADR: Generate decision records (using all agent outputs)
+  ADR-->>O: ADR documents + decision rationale
+
+  O->>DIAG: Create visual diagrams (architecture, flows)
+  DIAG-->>O: Mermaid diagrams + system maps
+
+  O-->>UI: Complete analysis with confidence scores
+  UI-->>U: Artifacts + export options + GitHub diffs
+
+```
+
 
 
 

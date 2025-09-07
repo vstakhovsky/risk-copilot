@@ -7,10 +7,10 @@ Save your project with Risk Copilot! → Upload your complete project context �
 That means you get 5 comprehensive, fully coherent project analyses per day for your entire organization—absolutely streamlined, thanks to complete context transfer and multi-agent intelligence.
 Perfect for complex projects:
 
-- **🏗️ Enterprise Software Development
-- **🏦 Financial Services & Compliance
-- **🏥 Healthcare & Regulated Industries
-- **🚀 Startup Product Launches
+- 🏗️ Enterprise Software Development
+- 🏦 Financial Services & Compliance
+- 🏥 Healthcare & Regulated Industries
+- 🚀 Startup Product Launches
 
 ---
 
@@ -79,6 +79,12 @@ Risk Copilot trades manual risk assessment for an "intelligent multi-agent blast
 - 💻 **Cross-platform** — Windows, macOS, Linux, and web browsers
 
 ---
+
+## 🏗️ System Architecture
+This describes the analysis flow. The core multi-agent orchestration and artifact generation remain the primary backend logic for creating deliverables based on project context and selected analysis profiles.
+
+### 🔄 4-Step Analysis Pipeline
+
 
 ## 📊 Data Flow
 - **Input:** Context JSON, documents, *aromas* (prompt profiles).  

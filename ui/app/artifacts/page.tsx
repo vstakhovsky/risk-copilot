@@ -1,0 +1,1 @@
+export default function Page(){return (<main><h2>Artifacts Page</h2></main>)}

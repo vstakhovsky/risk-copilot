@@ -1,0 +1,1 @@
+export default function Page(){return (<main><h1>Risk & Scope Copilot UI</h1></main>)}

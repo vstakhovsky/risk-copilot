@@ -134,6 +134,31 @@ flowchart LR
 ```
 
 
+### 🤖 Multi-Agent System
+
+```mermaid
+flowchart TB
+  UI[Desktop/Web Interface] --> API[FastAPI Orchestrator]
+  API --> AGENTS[Multi-Agent System]
+  API --> DB[(Project Database)]
+  API --> ART[(Artifacts Store)]
+  API --> VEC[(Vector Database)]
+  UI -. "real-time updates" .-> ART
+
+  subgraph "Specialized AI Agents"
+    AGENTS --> RISK[🎯 Risk Analysis Agent]
+    AGENTS --> SCOPE[⚖️ Scope Planning Agent]
+    AGENTS --> RACI[👥 RACI Matrix Agent]
+    AGENTS --> ADR[🧾 ADR Generation Agent]
+    AGENTS --> DIAG[📊 Diagram Agent]
+    AGENTS --> COMP[🔎 Compliance Agent]
+  end
+
+```
+
+
+
+
 ## 📊 Data Flow
 - **Input:** Context JSON, documents, *aromas* (prompt profiles).  
 - **Output:**  

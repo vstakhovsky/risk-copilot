@@ -254,43 +254,126 @@ docker-compose up -d
 
 <img width="675" height="736" alt="Screenshot 2025-09-08 at 23 06 58" src="https://github.com/user-attachments/assets/2503a7ab-98cf-4bf8-911b-9d30278ea9e5" />
 
-flowchart TB
-  start([Open App]) --> s1[Step 1 — Upload Context<br/><br/>• Select Project Folder<br/>• Exclude: logs/build/node_modules<br/>• Choose Profile: Startup / Enterprise / Fintech / Healthcare<br/>• Click <b>Prepare Context &amp; Proceed</b>]
 
-  s1 --> s2[Step 2 — Configure Agents<br/><br/>• Pick: 🎯 Risk, ⚖️ Scope, 👥 RACI, 📝 ADR, 📊 Diagram, 🔍 Compliance<br/>• Set parameters: confidence, focus areas, output format<br/>• Click <b>Start Analysis</b>]
+📱 Desktop Application Workflow
 
-  s2 --> pg((Parallel start))
-  pg --> a1[🎯 Risk Analysis]
-  pg --> a2[⚖️ Scope Planning]
-  pg --> a3[👥 RACI Matrix]
-  pg --> a4[📝 ADR Generation]
-  pg --> a5[📊 Diagramming]
-  pg --> a6[🔍 Compliance Checks]
+Run the application. The Risk Copilot window will open with the 4-step interface.
+Step 1: Upload Context
 
-  a1 --> jg((Join))
-  a2 --> jg
-  a3 --> jg
-  a4 --> jg
-  a5 --> jg
-  a6 --> jg
+Click "Select Project Folder" and choose your project repository root
+In the left pane Project Files, expand folders and un-tick any items you wish to exclude from analysis (logs, build artifacts, node_modules, etc.)
+Select your Analysis Profile from the sidebar:
 
-  jg --> s3[Step 3 — Execute Analysis<br/><br/>• Overall progress + per-agent status &amp; confidence<br/>• Live “evidence feed”<br/>• Click <b>View Results</b>]
+Startup: Speed, MVP focus, resource optimization
+Enterprise: Governance, compliance, stakeholder alignment
+Fintech: Security, PCI/SOX, regulatory compliance
+Healthcare: HIPAA, FDA approval, patient safety
 
-  s3 --> s4[Step 4 — Export &amp; Integrate<br/><br/>Artifacts: Risk report, Scope options, RACI, ADRs, Diagrams]
 
-  s4 --> xg{Choose export}
-  xg --> e1[📋 Jira tickets]
-  xg --> e2[📚 Confluence pages]
-  xg --> e3[🐙 GitHub PR]
-  xg --> e4[📊 PowerPoint deck]
-  xg --> e5[📁 ZIP package]
-  xg --> e6[🔗 Webhook / API]
-  e1 --> end([Complete Analysis])
-  e2 --> end
-  e3 --> end
-  e4 --> end
-  e5 --> end
-  e6 --> end
+Click "Prepare Project Context & Proceed"
+The project context will be generated and analyzed internally
+
+
+Step 2: Configure Analysis Agents
+
+The interface switches to Step 2 agent configuration
+Select your analysis agents from the available options:
+
+🎯 Risk Analysis Agent: Technical, business, and compliance risks
+⚖️ Scope Planning Agent: Alternative project scopes with trade-offs
+👥 RACI Matrix Agent: Stakeholder responsibility assignment
+📝 ADR Generation Agent: Architecture decision documentation
+📊 Diagram Agent: Visual system architecture and flows
+🔍 Compliance Agent: Industry standard compliance checks
+
+
+Configure agent parameters (confidence thresholds, focus areas, output formats)
+Click "Start Analysis"
+
+
+Step 3: Execute Analysis
+
+The interface switches to Step 3 real-time progress tracking
+Watch as each agent processes your project context:
+
+Overall Progress: Shows completion percentage across all agents
+Individual Agent Status: Real-time updates with confidence scores
+Evidence Collection: Live feed of findings and reasoning
+
+
+Analysis typically completes in 2-5 minutes depending on project size
+Click "View Results" when complete
+
+
+Step 4: Export & Integrate
+
+The interface switches to Step 4 results and export options
+Review Generated Artifacts:
+
+📊 Risk analysis with mitigation strategies and evidence scores
+⚖️ Scope options with cost-benefit analysis and timelines
+👥 RACI matrix with accountability gaps identified
+📝 ADR documents with decision context and alternatives
+📊 System diagrams (architecture, flows, deployment)
+
+
+Export Options:
+
+📋 Jira Integration: Create tickets for risks and action items
+📚 Confluence: Export as structured documentation pages
+🐙 GitHub: Create automated pull request with all artifacts
+📊 PowerPoint: Generate executive presentation deck
+📁 Download All: Complete analysis package (ZIP)
+🔗 API Integration: Custom webhook endpoints for your tools
+
+
+Click "Complete Analysis" to finish
+
+
+
+sequenceDiagram
+  autonumber
+  participant U as User
+  participant UI as Desktop UI
+  participant ORC as Orchestrator
+  box Agents
+    participant RA as 🎯 Risk
+    participant SC as ⚖️ Scope
+    participant RC as 👥 RACI
+    participant AD as 📝 ADR
+    participant DG as 📊 Diagram
+    participant CP as 🔍 Compliance
+  end
+
+  U->>UI: Open app
+  UI->>UI: Step 1 — Upload Context (select folder, exclude files, choose profile)
+  UI->>ORC: Prepare Context & Proceed
+
+  UI->>UI: Step 2 — Configure Agents (pick set + parameters)
+  UI->>ORC: Start Analysis (selected agents)
+
+  par Parallel analysis
+    ORC->>RA: Analyze technical/business/compliance risks
+    ORC->>SC: Generate scope options & trade-offs
+    ORC->>RC: Build RACI matrix & find gaps
+    ORC->>AD: Create ADRs with rationale
+    ORC->>DG: Produce system diagrams
+    ORC->>CP: Run compliance checks
+  end
+
+  Note over UI,Agents: UI streams progress, per-agent confidence, and evidence feed (≈2–5 min)
+
+  ORC-->>UI: Results ready
+  UI->>U: Step 3 — View Results (all artifacts)
+
+  U->>UI: Step 4 — Export choice (Jira/Confluence/PR/PPTX/ZIP/Webhook)
+  UI->>ORC: Export & finalize
+  UI-->>U: Complete Analysis (Done)
+
+
+
+
+
 
 
   

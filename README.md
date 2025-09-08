@@ -255,121 +255,121 @@ docker-compose up -d
 <img width="675" height="736" alt="Screenshot 2025-09-08 at 23 06 58" src="https://github.com/user-attachments/assets/2503a7ab-98cf-4bf8-911b-9d30278ea9e5" />
 
 
-📱 Desktop Application Workflow
+## 📱 Desktop Application Workflow
 
-Run the application. The Risk Copilot window will open with the 4-step interface.
-Step 1: Upload Context
+Run the application — the **Risk Copilot** window opens with a **4-step interface**.
 
-Click "Select Project Folder" and choose your project repository root
-In the left pane Project Files, expand folders and un-tick any items you wish to exclude from analysis (logs, build artifacts, node_modules, etc.)
-Select your Analysis Profile from the sidebar:
+---
 
-Startup: Speed, MVP focus, resource optimization
-Enterprise: Governance, compliance, stakeholder alignment
-Fintech: Security, PCI/SOX, regulatory compliance
-Healthcare: HIPAA, FDA approval, patient safety
+### 1) Upload Context
+- Click `Select Project Folder` and choose your project repository root.
+- In the left **Project Files** pane, expand folders and **un-tick** items to exclude from analysis *(e.g., logs, build artifacts, `node_modules`, etc.)*.
+- Pick an **Analysis Profile** in the sidebar:
+  - 🚀 **Startup** — speed, MVP focus, resource optimization  
+  - 🏢 **Enterprise** — governance, compliance, stakeholder alignment  
+  - 💳 **Fintech** — security, PCI/SOX, regulatory compliance  
+  - 🏥 **Healthcare** — HIPAA, FDA approval, patient safety  
+- Click **`Prepare Project Context & Proceed`**.  
+  *The project context is generated and analyzed internally.*
 
+---
 
-Click "Prepare Project Context & Proceed"
-The project context will be generated and analyzed internally
+### 2) Configure Analysis Agents
+- The UI switches to **Step 2** *(agent configuration)*. Select from:
+  - 🎯 **Risk Analysis Agent** — technical, business, and compliance risks  
+  - ⚖️ **Scope Planning Agent** — alternative project scopes with trade-offs  
+  - 👥 **RACI Matrix Agent** — stakeholder responsibility assignment  
+  - 📝 **ADR Generation Agent** — architecture decision documentation  
+  - 📊 **Diagram Agent** — system architecture & flow diagrams  
+  - 🔍 **Compliance Agent** — industry-standard compliance checks  
+- Configure **parameters**: confidence thresholds, focus areas, output formats.
+- Click **`Start Analysis`**.
 
+---
 
-Step 2: Configure Analysis Agents
+### 3) Execute Analysis
+- The UI switches to **Step 3** *(real-time progress)*. Observe:
+  - **Overall Progress** — completion % across all agents  
+  - **Per-Agent Status** — live updates with confidence scores  
+  - **Evidence Feed** — streaming findings and reasoning  
+- Typical duration: **≈ 2–5 minutes** *(depends on project size)*.
+- Click **`View Results`** when complete.
 
-The interface switches to Step 2 agent configuration
-Select your analysis agents from the available options:
+---
 
-🎯 Risk Analysis Agent: Technical, business, and compliance risks
-⚖️ Scope Planning Agent: Alternative project scopes with trade-offs
-👥 RACI Matrix Agent: Stakeholder responsibility assignment
-📝 ADR Generation Agent: Architecture decision documentation
-📊 Diagram Agent: Visual system architecture and flows
-🔍 Compliance Agent: Industry standard compliance checks
+### 4) Export & Integrate
+- The UI switches to **Step 4** *(results & export)*. Review generated **artifacts**:
+  - 📊 Risk analysis with mitigations & evidence scores  
+  - ⚖️ Scope options with cost-benefit & timelines  
+  - 👥 RACI matrix with accountability gaps  
+  - 📝 ADR documents with context & alternatives  
+  - 📈 System diagrams *(architecture, flows, deployment)*  
+- Choose **Export Options**:
+  - 📋 **Jira** — create tickets for risks & actions  
+  - 📚 **Confluence** — export structured pages  
+  - 🐙 **GitHub** — open automated pull request with artifacts  
+  - 📊 **PowerPoint** — generate executive deck  
+  - 📁 **Download All** — full ZIP package  
+  - 🔗 **API / Webhook** — send to your tools  
+- Click **`Complete Analysis`** to finish.
 
-
-Configure agent parameters (confidence thresholds, focus areas, output formats)
-Click "Start Analysis"
-
-
-Step 3: Execute Analysis
-
-The interface switches to Step 3 real-time progress tracking
-Watch as each agent processes your project context:
-
-Overall Progress: Shows completion percentage across all agents
-Individual Agent Status: Real-time updates with confidence scores
-Evidence Collection: Live feed of findings and reasoning
-
-
-Analysis typically completes in 2-5 minutes depending on project size
-Click "View Results" when complete
-
-
-Step 4: Export & Integrate
-
-The interface switches to Step 4 results and export options
-Review Generated Artifacts:
-
-📊 Risk analysis with mitigation strategies and evidence scores
-⚖️ Scope options with cost-benefit analysis and timelines
-👥 RACI matrix with accountability gaps identified
-📝 ADR documents with decision context and alternatives
-📊 System diagrams (architecture, flows, deployment)
-
-
-Export Options:
-
-📋 Jira Integration: Create tickets for risks and action items
-📚 Confluence: Export as structured documentation pages
-🐙 GitHub: Create automated pull request with all artifacts
-📊 PowerPoint: Generate executive presentation deck
-📁 Download All: Complete analysis package (ZIP)
-🔗 API Integration: Custom webhook endpoints for your tools
+> 💡 You can navigate between completed steps using the top **stepper** or return to previous configurations at any time.
 
 
-Click "Complete Analysis" to finish
+---
 
 
+### 🖥️ Command Line Interface
 
-sequenceDiagram
-  autonumber
-  participant U as User
-  participant UI as Desktop UI
-  participant ORC as Orchestrator
-  box Agents
-    participant RA as 🎯 Risk
-    participant SC as ⚖️ Scope
-    participant RC as 👥 RACI
-    participant AD as 📝 ADR
-    participant DG as 📊 Diagram
-    participant CP as 🔍 Compliance
-  end
+```bash
+# Basic project analysis
+python src/risk_copilot.py --input project_folder/ --output results/
 
-  U->>UI: Open app
-  UI->>UI: Step 1 — Upload Context (select folder, exclude files, choose profile)
-  UI->>ORC: Prepare Context & Proceed
+# With specific analysis profile
+python src/risk_copilot.py \
+  --input ./project_docs/ \
+  --profile enterprise \
+  --agents risk,scope,raci,adr,diagrams \
+  --confidence-threshold 0.8 \
+  --output detailed_analysis/
 
-  UI->>UI: Step 2 — Configure Agents (pick set + parameters)
-  UI->>ORC: Start Analysis (selected agents)
+# Batch processing multiple projects
+python src/risk_copilot.py \
+  --batch \
+  --input projects/*.json \
+  --template quarterly_review \
+  --output batch_results/
 
-  par Parallel analysis
-    ORC->>RA: Analyze technical/business/compliance risks
-    ORC->>SC: Generate scope options & trade-offs
-    ORC->>RC: Build RACI matrix & find gaps
-    ORC->>AD: Create ADRs with rationale
-    ORC->>DG: Produce system diagrams
-    ORC->>CP: Run compliance checks
-  end
+# Export to specific formats
+python src/risk_copilot.py \
+  --input project_context.json \
+  --output results/ \
+  --export jira,github,confluence
 
-  Note over UI,Agents: UI streams progress, per-agent confidence, and evidence feed (≈2–5 min)
+# Show full help
+python src/risk_copilot.py --help
+```
 
-  ORC-->>UI: Results ready
-  UI->>U: Step 3 — View Results (all artifacts)
+---
 
-  U->>UI: Step 4 — Export choice (Jira/Confluence/PR/PPTX/ZIP/Webhook)
-  UI->>ORC: Export & finalize
-  UI-->>U: Complete Analysis (Done)
+### 🌐 Web Interface
 
+```bash
+# Start web server (auto-reload for development)
+python -m uvicorn server.main:app --reload
+
+# Open in browser
+# http://localhost:8000
+
+# The web interface provides the same 4-step workflow:
+# 1) Upload project files or connect to repositories
+# 2) Configure analysis agents and parameters
+# 3) Monitor real-time multi-agent analysis
+# 4) Review results and export to integrated tools
+
+```
+
+---
 
 
 

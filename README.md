@@ -371,9 +371,89 @@ python -m uvicorn server.main:app --reload
 
 ---
 
+### 🧩 REST API
+
+```bash
+# Start comprehensive analysis
+curl -X POST http://localhost:8000/api/v1/analyze \
+  -H "Content-Type: multipart/form-data" \
+  -F "files=@project_docs.zip" \
+  -F "profile=enterprise" \
+  -F "agents=risk,scope,raci,adr,diagrams" \
+  -F "confidence_threshold=0.8"
+
+# Example response:
+# {"job_id":"uuid-123","status":"processing","estimated_completion":120}
+
+# Monitor analysis progress
+curl http://localhost:8000/api/v1/jobs/uuid-123/status
+# {"status":"processing","progress":65,"current_agent":"raci_matrix","artifacts":[]}
+
+# Download specific artifacts
+curl http://localhost:8000/api/v1/jobs/uuid-123/artifacts/risks.md
+curl http://localhost:8000/api/v1/jobs/uuid-123/artifacts/scope_options.md
+curl http://localhost:8000/api/v1/jobs/uuid-123/artifacts/raci.csv
+curl http://localhost:8000/api/v1/jobs/uuid-123/artifacts/complete.zip
+
+# Integration endpoints (example: open a GitHub PR with artifacts)
+curl -X POST http://localhost:8000/api/v1/integrations/github \
+  -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{"job_id":"uuid-123","repo":"owner/repo","create_pr":true}'
+
+```
 
 
+---
 
+## 📁 Input/Output Structure
+
+### 📨 Input Formats
+
+**Project Context JSON:**
+
+```json
+{
+  "project": {
+    "name": "Mobile Banking Platform",
+    "description": "Secure mobile banking with biometric authentication and fraud detection.",
+    "timeline": "Q2–Q3 2025",
+    "budget": "$2.5M",
+    "industry": "fintech"
+  },
+  "stakeholders": [
+    { "name": "Sarah Chen", "role": "Product Owner", "department": "Product" },
+    { "name": "Mike Rodriguez", "role": "Tech Lead", "department": "Engineering" },
+    { "name": "Legal Team", "role": "Compliance", "department": "Legal" }
+  ],
+  "requirements": [
+    "PCI DSS Level 1 compliance mandatory",
+    "Biometric authentication (Face ID, Touch ID)",
+    "Real-time fraud detection and alerts",
+    "Offline account balance viewing",
+    "Multi-language support (EN, ES, FR)"
+  ],
+  "constraints": [
+    "Must integrate with legacy core banking system (IBM)",
+    "iOS and Android app store approval within 12 weeks",
+    "SOX compliance for all financial data handling",
+    "Support for iOS 14+ and Android 10+",
+    "99.9% uptime SLA requirement"
+  ],
+  "documents": [
+    { "type": "requirements",   "path": "docs/business_requirements.md" },
+    { "type": "architecture",   "path": "docs/system_architecture.md" },
+    { "type": "compliance",     "path": "docs/pci_dss_requirements.pdf" },
+    { "type": "stakeholder_map","path": "docs/team_structure.json" }
+  ],
+  "profile": "fintech"
+}
+```
+Direct File Upload:
+
+- Supported formats: PDF, MD, TXT, JSON, DOCX, ZIP
+- Project folders: Complete repository upload with file filtering
+- Integration sources: GitHub, GitLab, Confluence, Google Drive
 
 
   

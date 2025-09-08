@@ -459,121 +459,260 @@ Direct File Upload:
   
 ---
 
-## 📊 Data Flow
-- **Input:** Context JSON, documents, *aromas* (prompt profiles).  
-- **Output:**  
-  - `out/risks.md`  
-  - `out/scope_options.md`  
-  - `out/raci.csv`  
-  - `out/adr-*.md`  
-  - `out/diagrams/*.mmd`
+### 📤 Output Structure
+
+analysis_results/
+├── 📊 artifacts/
+│   ├── risks.md                              # Comprehensive risk assessment
+│   ├── scope_options.md                      # Alternative project scopes with analysis
+│   ├── raci.csv                              # Stakeholder responsibility matrix
+│   ├── adr-001-authentication.md             # Security architecture decisions
+│   ├── adr-002-integration.md                # Legacy system integration approach
+│   ├── adr-003-compliance.md                 # PCI DSS compliance strategy
+│   └── diagrams/
+│       ├── system_architecture.mmd           # High-level system overview
+│       ├── authentication_flow.mmd           # Biometric auth sequence
+│       ├── data_flow_privacy.mmd             # Data handling & privacy boundaries
+│       └── deployment_diagram.mmd            # Infrastructure & deployment
+├── 🧪 evidence/
+│   ├── risk_confidence_scores.json           # Detailed confidence metrics per risk
+│   ├── stakeholder_analysis.json             # Responsibility-gap analysis
+│   ├── requirement_traceability.json         # Requirements → risk mapping
+│   └── decision_rationale.json               # ADR decision reasoning chains
+├── 🚚 exports/
+│   ├── jira_tickets.json                     # Ready-to-import Jira issues
+│   ├── confluence_pages.html                 # Formatted documentation pages
+│   ├── github_pr_template.md                 # PR description with all artifacts
+│   └── executive_presentation.pptx           # Stakeholder-ready slide deck
+└── 🧾 reports/
+    ├── executive_summary.md                  # C-level overview with key decisions
+    ├── technical_deep_dive.md                # Engineering team detailed analysis
+    ├── compliance_checklist.md               # Audit-ready compliance documentation
+    └── project_timeline.md                   # Milestone-based project roadmap
+
 
 ---
 
-## ✅ Functional / 🔒 Non-Functional
-**Functional**  
-- Risks / Scope / RACI / ADR / Diagrams generation  
-- Evidence & confidence scores  
-- REST API + CLI  
-- GitHub diffs & status dashboard  
+## 🎭 Analysis Profiles (“Aromas”)
 
-**Non-Functional**  
-- Traceability & audit logs  
-- Secrets protection (KMS)  
-- Horizontal scalability  
-- Security-first design
+> Pick a profile to tune agents, heuristics, and evidence scoring for your domain.
 
----
+| **Profile** | **Industry Focus** | **Key Analysis Areas** | **Typical Use Cases** |
+|---|---|---|---|
+| **startup** | Early-stage products | Speed, MVP scope, resource constraints, market fit | Product launch, seed-funding prep, rapid prototyping |
+| **enterprise** | Large organizations | Governance, compliance, stakeholder alignment, change management | Digital transformation, system migration, cross-team initiatives |
+| **fintech** | Financial services | Security, PCI/SOX compliance, regulatory requirements, fraud prevention | Banking platforms, payment systems, investment tools |
+| **healthcare** | Medical technology | HIPAA compliance, FDA approval, patient safety, clinical workflows | EHR systems, medical devices, telemedicine platforms |
+| **ecommerce** | Online retail | Scalability, payment security, user experience, conversion optimization | Marketplaces, retail apps, customer portals |
+| **manufacturing** | Industrial systems | Safety standards, supply chain, IoT integration, operational efficiency | Smart factory, logistics systems, equipment monitoring |
 
-## ⚙️ Tech Stack
-- **Backend:** Python 3.11 + FastAPI  
-- **Agents:** Claude MCP (v0.2+)  
-- **DB:** SQLite / Postgres  
-- **Vector Store:** Qdrant / FAISS  
-- **Frontend:** Next.js (v0.2)  
-- **Infra:** Replit / Vercel  
 
 ---
 
-## 🏗️ Architecture
+## 🔐 Security & Compliance
 
+### 🛡️ Security Architecture
+
+```mermaid
 flowchart TB
-  UI[Web UI] --> API[FastAPI Orchestrator]
-  API --> AGENTS[Claude Sub-Agents via MCP]
-  API --> DB[(Database)]
-  API --> ART[(Artifacts Repo)]
-  API --> VEC[(Vector DB)]
-  UI -. "diffs" .-> ART
+  subgraph "Input Security Layer"
+    A[Document Upload] --> B[Malware Scanning]
+    B --> C[Content Sanitization]
+    C --> D[Input Validation]
+  end
 
+  subgraph "Processing Security Layer"
+    D --> E[Encrypted Context Store]
+    E --> F[Agent Sandboxing]
+    F --> G[Output Filtering]
+  end
+
+  subgraph "Export Security Layer"
+    G --> H[Sensitive Data Detection]
+    H --> I[Access Control]
+    I --> J[Audit Logging]
+  end
+
+```
+
+- Controls by stage: Scan → Sanitize → Validate → Encrypt → Sandbox → Filter → DLP → RBAC → Audit.
 
 
 ---
 
-## 🔁 Process Pipeline
-flowchart LR
-  A[Intake] --> B[Risk Analysis]
-  B --> C[Scope Options]
-  C --> D[RACI Matrix]
-  D --> E[ADR Records]
-  E --> F[Diagrams]
-  F --> G[Validate & Export]
+## 🔒 Security Controls
+
+| Threat Category   | Specific Threats                                      | Mitigation Controls                                                                 |
+|-------------------|--------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Input Security**| Malicious file uploads, prompt injection              | Content scanning, input sanitization, file-type validation                           |
+| **Data Protection** | Data exfiltration, unauthorized access               | End-to-end encryption, KMS integration, role-based access (RBAC)                     |
+| **AI Safety**     | Prompt leakage, model manipulation                    | Response filtering, confidence thresholds, human oversight                           |
+| **Infrastructure**| SSRF, container escape, supply chain                  | Network isolation, signed dependencies, container security                            |
+| **Compliance**    | Data residency, audit requirements                    | Configurable data regions, immutable audit logs, compliance reporting                 |
+
 
 ---
 
-## 📐 UML Sequence
+## 📋 Compliance Features
 
-sequenceDiagram
-  participant U as User
-  participant UI as Web UI
-  participant API as FastAPI
-  participant A as Claude Agents
-  participant Repo as Repo/DB
+- 🏥 **HIPAA Ready** — patient data handling, Business Associate Agreements (BAAs), audit trails  
+- 🧾 **SOX Compliance** — financial controls, change management, segregation of duties  
+- 🇪🇺 **GDPR Compliant** — data minimization, consent management, right to erasure  
+- 💳 **PCI DSS** — secure payment data handling, network segmentation, encryption  
+- 📊 **SOC 2** — security controls, availability monitoring, confidentiality protection
 
-  U->>UI: Upload docs + select aroma
-  UI->>API: POST /run
-  API->>A: analyze_risks, scope_options, make_raci, generate_adr
-  A-->>API: artifacts + evidence
-  API->>Repo: store artifacts
-  API-->>UI: run_completed
-  UI-->>U: Show diffs, evidence, status
 
 ---
 
-## 🔐 AI Security
+## 🐛 Troubleshooting
 
-Threats
-- Prompt injection / jailbreak
-- Indirect injection (via external docs)
-- Data exfiltration
-- Tool abuse / SSRF / supply-chain
-- RAG poisoning
+| Symptom | Possible Cause | Solution |
+| --- | --- | --- |
+| `claude: API key not found` | Missing or invalid API key | Set `CLAUDE_API_KEY` in your `.env` with a valid Anthropic API key. |
+| `Analysis stuck at 0%` | Network issues or API rate limits | Check internet connection, verify API key permissions, and wait for rate-limit reset. |
+| `Large files failing upload` | File size exceeds limits | Use document chunking, compress files, or split very large repositories. |
+| `Empty artifact outputs` | Insufficient project context | Provide detailed requirements and include stakeholder information. |
+| `Agent configuration errors` | Invalid parameter combinations | Review agent compatibility matrix; check confidence threshold ranges. |
+| `Memory issues during analysis` | Large document processing | Increase available RAM, enable streaming/iterative processing, and ensure GC is enabled. |
+| `Export integration failures` | Invalid credentials or permissions | Verify API tokens, repository permissions, and test webhook endpoints. |
+| `Web UI not loading` | Frontend build or dependency issues | Run `npm install && npm run build`, then refresh and check browser console for errors. |
 
-Controls
-- Guardrails & content filters
-- Evidence + confidence scores
-- HITL checkpoints
-- Allow-/deny-lists for tools
-- Sandbox execution
-- IAM least-privilege
-- KMS for secrets
-- Immutable logs
-- Continuous CI/CD security evals
 
 ---
-## 📈 Roadmap
-- v0.2: UI + MCP
-- v0.3: BPMN/PR Flow integration
-- v1.0: RBAC + full audit
 
-------
-## 🚀 Quick Start
+## 🆘 Getting Additional Help
 
-# Generate artifacts
-python3 src/riskcopilot.py --input data/context.json --out out/
+- 📚 **Documentation:** [docs.risk-copilot.dev](https://docs.risk-copilot.dev)
+- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/vstakhovsky/risk-scope-copilot/issues)
+- 💬 **Community:** [GitHub Discussions](https://github.com/vstakhovsky/risk-scope-copilot/discussions)
+- 🧾 **Enterprise Support:** [support@risk-copilot.dev](mailto:support@risk-copilot.dev)
 
-# Run API server
-pip install -r server/requirements.txt
-uvicorn server.main:app --reload
+---
+
+## 🧭 Version Tiers (Feature Matrix)
+
+> ✅ = available, ⭕ = not in tier. Notes in parentheses show maturity.
+
+| Capability | V1 – MVP (now) | V2 – Beta | V3 – Scale |
+|---|:---:|:---:|:---:|
+| Risks & Constraints | ✅ | ✅ | ✅ |
+| Scope Options (A/B/C) | ✅ | ✅ | ✅ |
+| RACI Matrix | ✅ | ✅ | ✅ |
+| ADR Records (with versions) | ✅ *(UI)* | ✅ *(export)* | ✅ *(review flows)* |
+| Diagrams (C4-lite / flows) | ✅ *(basic)* | ✅ *(generator v1)* | ✅ *(advanced)* |
+| Importers (Jira / Confluence / GitHub) | ⭕ *(mock)* | ✅ | ✅ |
+| Exporters (MD / JSON / PDF) | ✅ *(MD/JSON)* | ✅ *(PDF)* | ✅ |
+| Read-only share links (expiry) | ⭕ | ✅ | ✅ |
+| Multi-agent orchestration | *Scaffold* | ✅ *(retries)* | ✅ *(observability, RBAC)* |
+| Dashboards (SLA / drift) | *Basic status* | *Improved* | *Advanced (program level)* |
+
+
+---
+
+## 🏗️ Technology Stack
+
+- **Backend:** Python 3.11+ with FastAPI and async processing  
+- **AI Agents:** Claude API with specialized prompt engineering  
+- **Frontend:** React / Vue.js with real-time WebSocket updates  
+- **Database:** PostgreSQL for project data, Qdrant for vector search  
+- **Desktop:** Electron wrapper with native file-system access  
+- **Infrastructure:** Docker containers with Kubernetes orchestration  
+- **Integration:** REST APIs for Jira, GitHub, Confluence, Slack  
+- **Security:** JWT authentication, KMS encryption, audit logging
+
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from **Technical Product Managers**, **Risk Analysts**, and **Software Engineers**!
+
+### 🔧 Development Setup
+
+```bash
+# 1) Fork and clone the repository
+git clone https://github.com/YOUR_USERNAME/risk-copilot
+cd risk-copilot
+
+# 2) Backend development environment
+python -m venv venv
+# macOS/Linux:
+source venv/bin/activate
+# Windows (PowerShell):
+# .\venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
+
+# 3) Frontend development environment
+cd frontend
+npm install
+npm run dev
+cd ..
+
+# 4) Run comprehensive test suite
+pytest backend/tests/ -v --cov=src/
+npm test
+
+# 5) Pre-commit hooks for code quality
+pre-commit install
+```
+
+---
+
+## 🧾 Contribution Guidelines
+
+1. 🍴 **Fork** the repository and create a feature branch.
+2. 🔎 **Review** existing issues and discussions before starting work.
+3. ✅ **Write** comprehensive tests for new functionality.
+4. 📝 **Document** changes in both code comments and user documentation.
+5. 🧪 **Test** across multiple platforms (Windows, macOS, Linux).
+6. 🎯 **Format** code using `black` for Python and `prettier` for JavaScript.
+7. 📬 **Submit** a pull request with a detailed description and test results.
+
+---
+
+## 🎯 Areas Where We Need Help
+
+- 🔌 **Integrations:** Adding support for more project-management tools.
+- 🎨 **UI/UX:** Improving the desktop and web interface design.
+- 🧠 **AI Agents:** Enhancing agent prompt engineering and reasoning.
+- 📊 **Analytics:** Building better confidence scoring and evidence tracking.
+- 🔒 **Security:** Strengthening security controls and compliance features.
+- 📚 **Documentation:** Creating tutorials, examples, and best practices.
+
+
+---
+
+## 🧾 License
+
+This project is licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **[Anthropic Claude](https://www.anthropic.com/)** for providing the AI capabilities that power our analysis agents  
+- **[FastAPI](https://fastapi.tiangolo.com/)** for the high-performance backend framework  
+- **[React](https://react.dev/)** and **[Vue.js](https://vuejs.org/)** for responsive user interfaces  
+- **[Mermaid](https://mermaid.js.org/)** for enabling beautiful, code-based diagram generation  
+- **[Shotgun Code](https://github.com/glebkudr/shotgun_code)** for inspiration on desktop application architecture  
+- **Open source community** for the tools, libraries, and frameworks that make this project possible
+
+---
+
+<div align="center">
+
+**Risk & Scope Copilot** — Load your project context, aim at clarity, blast through complexity.  
+Ship smarter, not harder. 🎯
+
+**[🚀 Get Started](#installation)** • **[📖 Documentation](./docs/README.md)** • **[🧪 Try Demo](https://preview--copilot-scope-insight.lovable.app/)** • **[🖥️ Replit](https://risk-scope-copilot-vstakhovsky.replit.app/)**
+
+*Transform project chaos into crystal-clear deliverables in 4 simple steps.*
+
+</div>
+
+---
+
+
 
 
 

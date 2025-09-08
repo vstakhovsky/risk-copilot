@@ -252,43 +252,67 @@ docker-compose up -d
 
 ### 📱 Desktop Application Workflow
 
-flowchart TB
-  start([Start]) --> t1[Upload Context]
-  t1 --> t2[Configure Agents]
+flowchart LR
+  %% Lanes (subgraphs) emulate swimlanes on GitHub
+  subgraph U[User]
+    U1([Open Risk Copilot])
+  end
 
-  t2 --> pg{Parallel Gateway<br/>Start Agents}
-  pg --> a1[🎯 Risk Analysis]
-  pg --> a2[⚖️ Scope Planning]
-  pg --> a3[👥 RACI Matrix]
-  pg --> a4[📝 ADR Generation]
-  pg --> a5[📊 Diagramming]
-  pg --> a6[🔍 Compliance]
+  subgraph UI[Interface]
+    A1[[Step 1: Upload Context<br/>• Select repo root<br/>• Exclude folders<br/>• Pick analysis profile]]
+    A2[[Step 2: Configure Agents<br/>• pick agents<br/>• set thresholds/focus<br/>• output formats]]
+    A3[[Step 3: Execute Analysis<br/>• progress + evidence feed]]
+    A4[[Step 4: Review & Export<br/>• risks, scope, RACI, ADRs, diagrams]]
+  end
 
-  a1 --> jg((Join Gateway))
-  a2 --> jg
-  a3 --> jg
-  a4 --> jg
-  a5 --> jg
-  a6 --> jg
+  subgraph ORCH[Orchestrator]
+    O1((Prepare Project Context))
+    O2((Dispatch to Agents in Parallel))
+    O3((Aggregate Findings + Scores))
+  end
 
-  jg --> t3[Aggregate Findings]
-  t3 --> t4[Review Results]
+  subgraph AGENTS[Specialized Agents]
+    RISK[[🎯 Risk Analysis]]
+    SCOPE[[⚖️ Scope Planning]]
+    RACI[[👥 RACI Matrix]]
+    ADR[[📝 ADR Generation]]
+    DIAG[[📊 Diagramming]]
+    COMP[[🔍 Compliance]]
+  end
 
-  t4 --> xg{Exclusive Gateway<br/>Export Choice}
-  xg --> e1[📋 Create Jira tickets]
-  xg --> e2[📚 Publish to Confluence]
-  xg --> e3[🐙 Open GitHub PR]
-  xg --> e4[📊 Generate PPTX deck]
-  xg --> e5[📁 Download ZIP]
-  xg --> e6[🔗 Call Webhook]
+  subgraph INTEG[Integrations]
+    JIRA[[📋 Jira tickets]]
+    CONF[[📚 Confluence pages]]
+    GH[[🐙 GitHub PR with artifacts]]
+    PPT[[📊 Executive deck (PPTX)]]
+    ZIP[[📁 Download ZIP]]
+    WEBHOOK[[🔗 Custom webhook / API]]
+  end
 
-  e1 --> end([End])
-  e2 --> end
-  e3 --> end
-  e4 --> end
-  e5 --> end
-  e6 --> end
+  %% Flow
+  U1 --> A1 --> O1 --> A2 --> O2
+  O2 --> RISK
+  O2 --> SCOPE
+  O2 --> RACI
+  O2 --> ADR
+  O2 --> DIAG
+  O2 --> COMP
 
+  RISK --> O3
+  SCOPE --> O3
+  RACI --> O3
+  ADR --> O3
+  DIAG --> O3
+  COMP --> O3
+
+  O3 --> A3 --> A4
+
+  A4 --> JIRA
+  A4 --> CONF
+  A4 --> GH
+  A4 --> PPT
+  A4 --> ZIP
+  A4 --> WEBHOOK
 
 
 

@@ -253,71 +253,83 @@ docker-compose up -d
 ### 📱 Desktop Application Workflow
 
 flowchart LR
-  %% Lanes (subgraphs) emulate swimlanes on GitHub
-  subgraph U[User]
-    U1([Open Risk Copilot])
+  %% === Layout ===
+  %% Left-to-right
+  %% Nodes
+  A0([Open App]) --> A1([4-Step Interface])
+
+  subgraph S1[Step 1 • Upload Context]
+    direction TB
+    S1a[[Select Project Folder]]
+    S1b[/Project Files tree<br/>(uncheck: logs, builds, node_modules)/]
+    S1c{{Analysis Profile<br/>Startup · Enterprise · Fintech · Healthcare}}
+    S1d([Prepare Project Context & Proceed])
+    S1a --> S1b --> S1c --> S1d
   end
 
-  subgraph UI[Interface]
-    A1[[Step 1: Upload Context<br/>• Select repo root<br/>• Exclude folders<br/>• Pick analysis profile]]
-    A2[[Step 2: Configure Agents<br/>• pick agents<br/>• set thresholds/focus<br/>• output formats]]
-    A3[[Step 3: Execute Analysis<br/>• progress + evidence feed]]
-    A4[[Step 4: Review & Export<br/>• risks, scope, RACI, ADRs, diagrams]]
+  subgraph S2[Step 2 • Configure Analysis Agents]
+    direction TB
+    S2a[[Choose Agents]]
+    S2a1[🎯 Risk Analysis]
+    S2a2[⚖️ Scope Planning]
+    S2a3[👥 RACI Matrix]
+    S2a4[📝 ADR Generation]
+    S2a5[📊 Diagram Agent]
+    S2a6[🔍 Compliance]
+    S2b[/Parameters:<br/>confidence · focus areas · output format/]
+    S2c([Start Analysis])
+    S2a --> S2a1 & S2a2 & S2a3 & S2a4 & S2a5 & S2a6 --> S2b --> S2c
   end
 
-  subgraph ORCH[Orchestrator]
-    O1((Prepare Project Context))
-    O2((Dispatch to Agents in Parallel))
-    O3((Aggregate Findings + Scores))
+  subgraph S3[Step 3 • Execute Analysis]
+    direction TB
+    S3a[[Real-time Progress]]
+    S3b[/Per-agent status + confidence/]
+    S3c[/Evidence feed (live findings)/]
+    S3d([≈ 2–5 min]):::hint
+    S3e([View Results])
+    S3a --> S3b --> S3c --> S3d --> S3e
   end
 
-  subgraph AGENTS[Specialized Agents]
-    RISK[[🎯 Risk Analysis]]
-    SCOPE[[⚖️ Scope Planning]]
-    RACI[[👥 RACI Matrix]]
-    ADR[[📝 ADR Generation]]
-    DIAG[[📊 Diagramming]]
-    COMP[[🔍 Compliance]]
+  subgraph S4[Step 4 • Export & Integrate]
+    direction TB
+    S4a[[Review Generated Artifacts]]
+    S4a1[📊 Risks (mitigations + evidence)]
+    S4a2[⚖️ Scope options (trade-offs & timelines)]
+    S4a3[👥 RACI (accountability gaps)]
+    S4a4[📝 ADRs (context & alternatives)]
+    S4a5[📊 System diagrams]
+    S4a --> S4a1 & S4a2 & S4a3 & S4a4 & S4a5
+    S4x{Choose Export}
+    S4e1[📋 Create Jira tickets]
+    S4e2[📚 Publish to Confluence]
+    S4e3[🐙 Open GitHub PR]
+    S4e4[📊 Generate PPTX deck]
+    S4e5[📁 Download ZIP]
+    S4e6[🔗 Call Webhook]
+    S4x --> S4e1 & S4e2 & S4e3 & S4e4 & S4e5 & S4e6
+    S4Done([Complete Analysis → Done])
   end
 
-  subgraph INTEG[Integrations]
-    JIRA[[📋 Jira tickets]]
-    CONF[[📚 Confluence pages]]
-    GH[[🐙 GitHub PR with artifacts]]
-    PPT[[📊 Executive deck (PPTX)]]
-    ZIP[[📁 Download ZIP]]
-    WEBHOOK[[🔗 Custom webhook / API]]
-  end
+  %% === Flow wiring ===
+  A1 --> S1 --> S2 --> S3 --> S4
+  S4e1 --> S4Done
+  S4e2 --> S4Done
+  S4e3 --> S4Done
+  S4e4 --> S4Done
+  S4e5 --> S4Done
+  S4e6 --> S4Done
 
-  %% Flow
-  U1 --> A1 --> O1 --> A2 --> O2
-  O2 --> RISK
-  O2 --> SCOPE
-  O2 --> RACI
-  O2 --> ADR
-  O2 --> DIAG
-  O2 --> COMP
+  %% Helper note: navigation
+  N1{{Top stepper allows revisiting finished steps}}:::note
+  A1 -.-> N1
+  N1 -.-> S2
 
-  RISK --> O3
-  SCOPE --> O3
-  RACI --> O3
-  ADR --> O3
-  DIAG --> O3
-  COMP --> O3
-
-  O3 --> A3 --> A4
-
-  A4 --> JIRA
-  A4 --> CONF
-  A4 --> GH
-  A4 --> PPT
-  A4 --> ZIP
-  A4 --> WEBHOOK
-
-
-
-
-
+  %% === Styling ===
+  classDef hint fill:#111827,stroke:#94a3b8,color:#cbd5e1;
+  classDef note fill:#0b1220,stroke:#60a5fa,color:#93c5fd;
+  classDef step fill:#0f172a,stroke:#64748b,color:#e2e8f0;
+  class S1,S2,S3,S4 step;
 
 ---
 

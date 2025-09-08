@@ -694,7 +694,6 @@ This project is licensed under the **MIT License** — see [LICENSE](./LICENSE) 
 - **[FastAPI](https://fastapi.tiangolo.com/)** for the high-performance backend framework  
 - **[React](https://react.dev/)** and **[Vue.js](https://vuejs.org/)** for responsive user interfaces  
 - **[Mermaid](https://mermaid.js.org/)** for enabling beautiful, code-based diagram generation  
-- **[Shotgun Code](https://github.com/glebkudr/shotgun_code)** for inspiration on desktop application architecture  
 - **Open source community** for the tools, libraries, and frameworks that make this project possible
 
 ---

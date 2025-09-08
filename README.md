@@ -461,6 +461,8 @@ Direct File Upload:
 
 ### 📤 Output Structure
 
+> 
+
 analysis_results/
 ├── 📊 artifacts/
 │   ├── risks.md                              # Comprehensive risk assessment

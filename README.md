@@ -245,6 +245,56 @@ docker-compose up -d
 
 ```
 
+
+---
+
+## 🚀 Usage
+
+### 📱 Desktop Application Workflow
+
+flowchart TB
+  start([Start]) --> t1[Upload Context]
+  t1 --> t2[Configure Agents]
+
+  t2 --> pg{Parallel Gateway<br/>Start Agents}
+  pg --> a1[🎯 Risk Analysis]
+  pg --> a2[⚖️ Scope Planning]
+  pg --> a3[👥 RACI Matrix]
+  pg --> a4[📝 ADR Generation]
+  pg --> a5[📊 Diagramming]
+  pg --> a6[🔍 Compliance]
+
+  a1 --> jg((Join Gateway))
+  a2 --> jg
+  a3 --> jg
+  a4 --> jg
+  a5 --> jg
+  a6 --> jg
+
+  jg --> t3[Aggregate Findings]
+  t3 --> t4[Review Results]
+
+  t4 --> xg{Exclusive Gateway<br/>Export Choice}
+  xg --> e1[📋 Create Jira tickets]
+  xg --> e2[📚 Publish to Confluence]
+  xg --> e3[🐙 Open GitHub PR]
+  xg --> e4[📊 Generate PPTX deck]
+  xg --> e5[📁 Download ZIP]
+  xg --> e6[🔗 Call Webhook]
+
+  e1 --> end([End])
+  e2 --> end
+  e3 --> end
+  e4 --> end
+  e5 --> end
+  e6 --> end
+
+
+
+
+
+
+
 ---
 
 ## 📊 Data Flow

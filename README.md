@@ -461,37 +461,37 @@ Direct File Upload:
 
 ### 📤 Output Structure
 
-> 
-
+```text
 analysis_results/
 ├── 📊 artifacts/
-│   ├── risks.md                              # Comprehensive risk assessment
-│   ├── scope_options.md                      # Alternative project scopes with analysis
-│   ├── raci.csv                              # Stakeholder responsibility matrix
-│   ├── adr-001-authentication.md             # Security architecture decisions
-│   ├── adr-002-integration.md                # Legacy system integration approach
-│   ├── adr-003-compliance.md                 # PCI DSS compliance strategy
+│   ├── risks.md                         # Comprehensive risk assessment
+│   ├── scope_options.md                 # Alternative project scopes with analysis
+│   ├── raci.csv                         # Stakeholder responsibility matrix
+│   ├── adr-001-authentication.md        # Security architecture decisions
+│   ├── adr-002-integration.md           # Legacy system integration approach
+│   ├── adr-003-compliance.md            # PCI DSS compliance strategy
 │   └── diagrams/
-│       ├── system_architecture.mmd           # High-level system overview
-│       ├── authentication_flow.mmd           # Biometric auth sequence
-│       ├── data_flow_privacy.mmd             # Data handling & privacy boundaries
-│       └── deployment_diagram.mmd            # Infrastructure & deployment
+│       ├── system_architecture.mmd      # High-level system overview
+│       ├── authentication_flow.mmd      # Biometric auth sequence
+│       ├── data_flow_privacy.mmd        # Data handling & privacy boundaries
+│       └── deployment_diagram.mmd       # Infrastructure & deployment
 ├── 🧪 evidence/
-│   ├── risk_confidence_scores.json           # Detailed confidence metrics per risk
-│   ├── stakeholder_analysis.json             # Responsibility-gap analysis
-│   ├── requirement_traceability.json         # Requirements → risk mapping
-│   └── decision_rationale.json               # ADR decision reasoning chains
+│   ├── risk_confidence_scores.json      # Detailed confidence metrics per risk
+│   ├── stakeholder_analysis.json        # Responsibility-gap analysis
+│   ├── requirement_traceability.json    # Requirements → risk mapping
+│   └── decision_rationale.json          # ADR decision reasoning chains
 ├── 🚚 exports/
-│   ├── jira_tickets.json                     # Ready-to-import Jira issues
-│   ├── confluence_pages.html                 # Formatted documentation pages
-│   ├── github_pr_template.md                 # PR description with all artifacts
-│   └── executive_presentation.pptx           # Stakeholder-ready slide deck
+│   ├── jira_tickets.json                # Ready-to-import Jira issues
+│   ├── confluence_pages.html            # Formatted documentation pages
+│   ├── github_pr_template.md            # PR description with all artifacts
+│   └── executive_presentation.pptx      # Stakeholder-ready slide deck
 └── 🧾 reports/
-    ├── executive_summary.md                  # C-level overview with key decisions
-    ├── technical_deep_dive.md                # Engineering team detailed analysis
-    ├── compliance_checklist.md               # Audit-ready compliance documentation
-    └── project_timeline.md                   # Milestone-based project roadmap
+    ├── executive_summary.md             # C-level overview with key decisions
+    ├── technical_deep_dive.md           # Engineering team detailed analysis
+    ├── compliance_checklist.md          # Audit-ready compliance documentation
+    └── project_timeline.md              # Milestone-based project roadmap
 
+```
 
 ---
 

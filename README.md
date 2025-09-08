@@ -132,7 +132,7 @@ flowchart LR
   D --> D1 --> D2 --> D3 --> D4
 
 ```
-
+---
 
 ### 🤖 Multi-Agent System
 
@@ -155,6 +155,7 @@ flowchart TB
   end
 
 ```
+---
 
 ### 🧭 Agent Interaction Sequence
 
@@ -194,8 +195,57 @@ sequenceDiagram
 
 ```
 
+---
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- **Go ≥ 1.20** → `go version`
+- **Python ≥ 3.11** → `python --version`
+- **Node.js (LTS)** → `node -v`
+- **Claude API Key** → [Get from Anthropic Console](https://console.anthropic.com/)
 
 
+### Quick Setup
+
+```bash
+git clone https://github.com/vstakhovsky/risk-scope-copilot
+cd risk-scope-copilot
+
+# Backend dependencies
+pip install -r requirements.txt
+
+# Frontend dependencies
+npm install
+
+# Environment setup
+cp .env.example .env
+# Edit .env with your CLAUDE_API_KEY and other settings
+
+# Development mode (use separate terminals if you run both)
+python run.py        # Backend server (if applicable)
+npm run dev          # Frontend (Next.js)
+
+```
+
+### 🚀 Production Build
+
+```bash
+# Desktop application
+python build.py --target desktop
+
+# Web application
+python build.py --target web
+
+# Docker deployment
+docker-compose up -d
+
+# Binaries available in build/bin/
+
+```
+
+---
 
 ## 📊 Data Flow
 - **Input:** Context JSON, documents, *aromas* (prompt profiles).  
